@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProjektAIka — Darmowa instrukcja: zobacz swoją nową kuchnię</title>
+  <meta name="description" content="Darmowa instrukcja krok po kroku: jak w ChatGPT zobaczyć swoją kuchnię po remoncie, zanim wydasz na niego pieniądze.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Skrypt formularza Sendera -->
+<script>
+  (function (s, e, n, d, er) {
+    s['Sender'] = er;
+    s[er] = s[er] || function () {
+      (s[er].q = s[er].q || []).push(arguments)
+    }, s[er].l = 1 * new Date();
+    s[er].on = function(event, callback) {
+      s[er].listeners = s[er].listeners || {};
+      (s[er].listeners[event] = s[er].listeners[event] || []).push(callback);
+    };
+    var a = e.createElement(n),
+        m = e.getElementsByTagName(n)[0];
+    a.async = 1;
+    a.src = d;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+  sender('f3686a2fde9147')
+</script>
+
+  <style>
+    @font-face {
+      font-family: "Hatton";
+      src: url("fonts/Hatton-Bold.woff2") format("woff2"),
+           url("fonts/Hatton-Bold.otf") format("opentype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* KOLORY MARKI — te same co w polityce prywatności */
+    :root {
+      --ink: #a3bcc7;
+      --mainfont: #543a2b;
+      --accent: #224b5c;
+      --paper: #dedede;
+      --line: #543a2b;
+      --muted: #7A746D;
+      --font-display: "Hatton", "Playfair Display", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--mainfont);
+      background: var(--paper);
+      font-family: "Poppins", sans-serif;
+    }
+
+    a:focus-visible,
+    input:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    .page-shell {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---------- Pasek z logo (jak w polityce prywatności) ---------- */
+    .top-bar { background: var(--ink); }
+    .top-bar-inner {
+      color: var(--mainfont);
+      font-weight: 1;
+      font-size: 1rem;
+      letter-spacing: .16em;
+      line-height: 0.5;
+    }
+    .top-bar-inner a { color: inherit; text-decoration: none; }
+    .ai-highlight { color: var(--paper); }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-logo {
+      display: block;
+      height: 70px;
+      width: auto;
+    }
+
+    /* ---------- Treść ---------- */
+    .hero {
+      display: grid;
+      gap: 36px;
+      padding: 40px 0 64px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 2rem;
+      line-height: 1.12;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      font-size: .98rem;
+      line-height: 1.75;
+    }
+
+    .benefits {
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .benefits li {
+      position: relative;
+      padding: 10px 0 10px 28px;
+      border-top: 1px solid var(--line);
+      font-size: .92rem;
+      line-height: 1.6;
+    }
+    .benefits li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ---------- Suwak przed / po ---------- */
+    .comparison {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #cfcfcf;
+      cursor: ew-resize;
+      user-select: none;
+      touch-action: pan-y;
+    }
+
+    .comparison img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* Warstwa "przed" ma pełną szerokość i jest przycinana, więc oba zdjęcia zawsze się pokrywają */
+    .comparison-before {
+      position: absolute;
+      inset: 0;
+      clip-path: inset(0 50% 0 0);
+    }
+
+    .image-label {
+      position: absolute;
+      top: 14px;
+      z-index: 3;
+      padding: 7px 10px;
+      background: rgba(222, 222, 222, .92);
+      color: var(--mainfont);
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+    }
+    .label-before { left: 14px; }
+    .label-after { right: 14px; }
+
+    .slider-line {
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      z-index: 5;
+      width: 2px;
+      background: var(--paper);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .slider-handle {
+      position: absolute;
+      top: 50%; left: 50%;
+      z-index: 6;
+      display: grid;
+      width: 44px; height: 44px;
+      place-items: center;
+      border: 2px solid var(--paper);
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--paper);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .slider-range {
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      width: 100%; height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: ew-resize;
+    }
+
+    .preview-caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ---------- Formularz ---------- */
+    .form-card {
+      margin-top: 30px;
+      padding: 24px 20px;
+      background: #f2f2f2;
+      border-top: 3px solid var(--accent);
+    }
+    .form-card h2 {
+      margin: 0 0 6px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.35rem;
+    }
+    .form-card p {
+      margin: 0 0 18px;
+      font-size: .86rem;
+      line-height: 1.6;
+    }
+
+    /* Widoczne tylko dopóki nie wkleisz formularza Sendera */
+    .form-placeholder {
+      padding: 22px;
+      border: 1px dashed var(--accent);
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .form-slot:has(.sender-form-field) .form-placeholder { display: none; }
+
+    .privacy-note {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: .72rem;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); }
+
+    footer {
+      padding: 28px 0 48px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .75rem;
+      line-height: 1.8;
+    }
+
+    @media (min-width: 820px) {
+      .page-shell { padding: 0 46px; }
+      .hero {
+        grid-template-columns: 1.05fr .95fr;
+        gap: 56px;
+        align-items: start;
+        padding: 72px 0 96px;
+      }
+      h1 { font-size: 3rem; }
+      .form-card { padding: 30px 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="page-shell top-bar-inner">
+      <a href="zapisz.html" class="brand">
+        <img src="logo.png" alt="" class="brand-logo">
+        <span>PROJEKT<span class="ai-highlight">AI</span>KA</span>
+      </a>
+    </div>
+  </div>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">DARMOWA INSTRUKCJA</p>
+        <h1>Zobacz swoją nową kuchnię, zanim wydasz pieniądze na remont.</h1>
+        <p class="lead">Zapisz się, a wyślę Ci prostą instrukcję krok po kroku: jak w ChatGPT zamienić zdjęcie Twojej kuchni w wizualizację po remoncie.</p>
+
+        <ul class="benefits">
+          <li>Gotowy prompt do skopiowania jednym kliknięciem</li>
+          <li>Moodboard do pobrania</li>
+          <li>Bez wiedzy technicznej, wystarczy darmowe konto ChatGPT</li>
+        </ul>
+
+        <div class="form-card" id="zapis">
+          <h2>Gdzie wysłać instrukcję?</h2>
+          <p>Link przyjdzie na Twoją skrzynkę od razu po potwierdzeniu zapisu.</p>
+
+          <div class="form-slot">
+            <!-- Formularz zapisu Sendera -->
+            <div style="text-align: left" class="sender-form-field" data-sender-form-id="e73Q7B"></div>
+          </div>
+
+          <p class="privacy-note">Zapisując się, dołączasz do newslettera ProjektAIki. Wypiszesz się w każdej chwili jednym kliknięciem. Szczegóły w <a href="polityka-prywatnosci.html">polityce prywatności</a>.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="comparison" aria-label="Suwak porównujący kuchnię przed i po wizualizacji AI">
+          <img src="result.png" alt="Kuchnia po wizualizacji AI">
+          <div id="before-layer" class="comparison-before">
+            <img src="Image1.png" alt="Kuchnia przed remontem">
+          </div>
+          <span class="image-label label-before">PRZED</span>
+          <span class="image-label label-after">PO</span>
+          <div id="slider-line" class="slider-line"></div>
+          <div id="slider-handle" class="slider-handle" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-5 5 5 5"/><path d="m15 7 5 5-5 5"/></svg>
+          </div>
+          <label for="comparison-range" class="sr-only">Przesuń, aby porównać kuchnię przed i po</label>
+          <input id="comparison-range" class="slider-range" type="range" min="0" max="100" value="50">
+        </div>
+        <p class="preview-caption">Przesuń suwak. Taki efekt osiągniesz z moją instrukcją.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-shell">
+    <a href="https://www.instagram.com/projektaika/" target="_blank" rel="noopener noreferrer">@ProjektAIka</a> ·
+    <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+  </footer>
+
+  <script>
+    const range = document.getElementById("comparison-range");
+    const beforeLayer = document.getElementById("before-layer");
+    const sliderLine = document.getElementById("slider-line");
+    const sliderHandle = document.getElementById("slider-handle");
+
+    function updateComparison(value) {
+      beforeLayer.style.clipPath = "inset(0 " + (100 - value) + "% 0 0)";
+      sliderLine.style.left = value + "%";
+      sliderHandle.style.left = value + "%";
+    }
+
+    range.addEventListener("input", function () {
+      updateComparison(this.value);
+    });
+
+    updateComparison(range.value);
+  </script>
+</body>
+</html>
