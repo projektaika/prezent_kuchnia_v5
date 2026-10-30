@@ -11,24 +11,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
 
   <!-- Skrypt formularza Sendera -->
-<script>
-  (function (s, e, n, d, er) {
-    s['Sender'] = er;
-    s[er] = s[er] || function () {
-      (s[er].q = s[er].q || []).push(arguments)
-    }, s[er].l = 1 * new Date();
-    s[er].on = function(event, callback) {
-      s[er].listeners = s[er].listeners || {};
-      (s[er].listeners[event] = s[er].listeners[event] || []).push(callback);
-    };
-    var a = e.createElement(n),
-        m = e.getElementsByTagName(n)[0];
-    a.async = 1;
-    a.src = d;
-    m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
-  sender('f3686a2fde9147')
-</script>
+  <script>
+    (function (s, e, n, d, er) {
+      s['Sender'] = er;
+      s[er] = s[er] || function () {
+        (s[er].q = s[er].q || []).push(arguments)
+      }, s[er].l = 1 * new Date();
+      s[er].on = function(event, callback) {
+        s[er].listeners = s[er].listeners || {};
+        (s[er].listeners[event] = s[er].listeners[event] || []).push(callback);
+      };
+      var a = e.createElement(n),
+          m = e.getElementsByTagName(n)[0];
+      a.async = 1;
+      a.src = d;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+    sender('f3686a2fde9147')
+  </script>
 
   <style>
     /* KOLORY MARKI — te same co w polityce prywatności */
@@ -86,9 +86,13 @@
     }
 
     /* ---------- Treść ---------- */
+    /* Na telefonie kolejność: nagłówek, suwak przed/po, lista i formularz */
+    .hero-text, .hero-visual, .hero-form { min-width: 0; }
+    .benefits { margin-top: 0 !important; }
+
     .hero {
       display: grid;
-      gap: 36px;
+      gap: 28px;
       padding: 40px 0 64px;
     }
 
@@ -278,10 +282,13 @@
       .page-shell { padding: 0 46px; }
       .hero {
         grid-template-columns: 1.05fr .95fr;
-        gap: 56px;
+        column-gap: 56px;
+        row-gap: 28px;
         align-items: start;
         padding: 72px 0 96px;
       }
+      /* Na komputerze suwak stoi w prawej kolumnie obok tekstu i formularza */
+      .hero-visual { grid-column: 2; grid-row: 1 / span 2; }
       h1 { font-size: 3rem; }
       .form-card { padding: 30px 28px; }
     }
@@ -306,31 +313,13 @@
 
   <main class="page-shell">
     <section class="hero">
-      <div>
+      <div class="hero-text">
         <p class="eyebrow">DARMOWA INSTRUKCJA</p>
         <h1>Zobacz swoją nową kuchnię, zanim wydasz pieniądze na remont.</h1>
-        <p class="lead">Zapisz się, a wyślę Ci prostą instrukcję krok po kroku: jak w ChatGPT zamienić zdjęcie Twojej kuchni w wizualizację po remoncie.</p>
-
-        <ul class="benefits">
-          <li>Gotowy prompt do skopiowania jednym kliknięciem</li>
-          <li>Moodboard do pobrania</li>
-          <li>Bez wiedzy technicznej, wystarczy darmowe konto ChatGPT</li>
-        </ul>
-
-        <div class="form-card" id="zapis">
-          <h2>Gdzie wysłać instrukcję?</h2>
-          <p>Link przyjdzie na Twoją skrzynkę od razu po potwierdzeniu zapisu.</p>
-
-          <div class="form-slot">
-            <!-- Formularz zapisu Sendera -->
-            <div style="text-align: left" class="sender-form-field" data-sender-form-id="e73Q7B"></div>
-          </div>
-
-          <p class="privacy-note">Zapisując się, dołączasz do newslettera ProjektAIki. Wypiszesz się w każdej chwili jednym kliknięciem. Szczegóły w <a href="polityka-prywatnosci.html">polityce prywatności</a>.</p>
-        </div>
+        <p class="lead">Zostaw swój adres e-mail, a wyślę Ci darmową instrukcję krok po kroku: jak w ChatGPT zamienić zdjęcie Twojej kuchni w wizualizację po remoncie.</p>
       </div>
 
-      <div>
+      <div class="hero-visual">
         <div class="comparison" aria-label="Suwak porównujący kuchnię przed i po wizualizacji AI">
           <img src="assets/result.png" alt="Kuchnia po wizualizacji AI">
           <div id="before-layer" class="comparison-before">
@@ -346,6 +335,26 @@
           <input id="comparison-range" class="slider-range" type="range" min="0" max="100" value="50">
         </div>
         <p class="preview-caption">Przesuń suwak. Taki efekt osiągniesz z moją instrukcją.</p>
+      </div>
+
+      <div class="hero-form">
+        <ul class="benefits">
+          <li>Gotowy prompt do skopiowania jednym kliknięciem</li>
+          <li>Moodboard do pobrania</li>
+          <li>Bez wiedzy technicznej, wystarczy darmowe konto ChatGPT</li>
+        </ul>
+
+        <div class="form-card" id="zapis">
+          <h2>Odbierz darmową instrukcję</h2>
+          <p>Wpisz imię i adres e-mail. Za chwilę dostaniesz wiadomość z prośbą o potwierdzenie adresu. Kliknij w niej przycisk, a od razu wyślę Ci link do instrukcji.</p>
+
+          <div class="form-slot">
+            <!-- Formularz zapisu Sendera -->
+            <div style="text-align: left" class="sender-form-field" data-sender-form-id="e73Q7B"></div>
+          </div>
+
+          <p class="privacy-note">Zapisując się, dołączasz do newslettera ProjektAIki. Wypiszesz się w każdej chwili jednym kliknięciem. Szczegóły w <a href="polityka-prywatnosci.html">polityce prywatności</a>.</p>
+        </div>
       </div>
     </section>
   </main>
