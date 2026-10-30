@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Strona po potwierdzeniu zapisu: ukryta przed wyszukiwarkami -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>ProjektAIka — Zapis potwierdzony</title>
+  <link rel="icon" href="assets/logo.png">
+  <link href="https://api.fontshare.com/v2/css?f[]=boska@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #a3bcc7;
+      --mainfont: #543a2b;
+      --accent: #543a2b;
+      --paper: #f6f7f7;
+      --card: #e8eff2;
+      --muted: #6e625a;
+      --font-display: "Boska", "Playfair Display", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      color: var(--mainfont);
+      background: var(--paper);
+      font-family: "Poppins", sans-serif;
+      line-height: 1.7;
+    }
+
+    ::selection { background: var(--ink); color: var(--mainfont); }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    .page-shell { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+    /* Pasek z logo, jak na pozostałych stronach */
+    .top-bar { background: var(--ink); }
+    .top-bar-inner {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      color: var(--mainfont);
+      font-size: .85rem;
+      letter-spacing: .18em;
+      line-height: 1;
+    }
+    .top-bar-inner a { color: inherit; text-decoration: none; }
+    .ai-highlight { font-weight: 700; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand-logo { display: block; height: 40px; width: auto; }
+
+    main { flex: 1; }
+
+    .thanks {
+      max-width: 34em;
+      padding: 40px 0 64px;
+    }
+
+    /* Znaczek i nagłówek w jednej linii */
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .check {
+      flex: none;
+      display: grid;
+      width: 44px; height: 44px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--mainfont);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 2rem;
+      line-height: 1.15;
+    }
+
+    p { margin: 16px 0 0; }
+
+    .hint {
+      margin-top: 28px;
+      padding: 16px 20px;
+      border-radius: 4px;
+      background: var(--card);
+      font-size: .93rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      margin-top: 28px;
+      padding: 12px 22px;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      background: var(--accent);
+      color: var(--paper);
+      font-size: .92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease, color .2s ease;
+    }
+    .button:hover { background: transparent; color: var(--accent); }
+
+    @media (min-width: 820px) {
+      .page-shell { padding: 0 46px; }
+      h1 { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="page-shell top-bar-inner">
+      <a href="zapisz.html" class="brand">
+        <img src="assets/logo.png" alt="" class="brand-logo">
+        <span>PROJEKT<span class="ai-highlight">AI</span>KA</span>
+      </a>
+    </div>
+  </div>
+
+  <main class="page-shell">
+    <section class="thanks">
+      <div class="title-row">
+        <div class="check" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </div>
+        <h1>Zapis potwierdzony</h1>
+      </div>
+      <p>Dziękuję!</p>
+      <p>Instrukcja jest już w drodze. W ciągu kilku minut znajdziesz ją w swojej skrzynce w mailu „Twoja instrukcja jest gotowa”.</p>
+      <p class="hint">Nie widzisz maila? Zajrzyj do folderu Oferty lub Spam. Jeśli go tam znajdziesz, oznacz go jako „To nie spam”, żeby kolejne wiadomości trafiały prosto do Ciebie.</p>
+      <a class="button" href="https://www.instagram.com/projektaika/" target="_blank" rel="noopener noreferrer">Zobacz więcej na Instagramie</a>
+    </section>
+  </main>
+</body>
+</html>
