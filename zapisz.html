@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ProjektAIka — Darmowa instrukcja: zobacz swoją nową kuchnię</title>
+  <link rel="icon" href="assets/logo.png">
   <meta name="description" content="Darmowa instrukcja krok po kroku: jak w ChatGPT zobaczyć swoją kuchnię po remoncie, zanim wydasz na niego pieniądze.">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Czcionka nagłówków: Boska (darmowa, Fontshare) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=boska@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
 
   <!-- Skrypt formularza Sendera -->
 <script>
@@ -28,24 +31,15 @@
 </script>
 
   <style>
-    @font-face {
-      font-family: "Hatton";
-      src: url("fonts/Hatton-Bold.woff2") format("woff2"),
-           url("fonts/Hatton-Bold.otf") format("opentype");
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-
     /* KOLORY MARKI — te same co w polityce prywatności */
     :root {
       --ink: #a3bcc7;
       --mainfont: #543a2b;
-      --accent: #224b5c;
-      --paper: #dedede;
+      --accent: #543a2b;
+      --paper: #f6f7f7;
       --line: #543a2b;
       --muted: #7A746D;
-      --font-display: "Hatton", "Playfair Display", Georgia, serif;
+      --font-display: "Boska", "Playfair Display", Georgia, serif;
     }
 
     * { box-sizing: border-box; }
@@ -70,23 +64,24 @@
     /* ---------- Pasek z logo (jak w polityce prywatności) ---------- */
     .top-bar { background: var(--ink); }
     .top-bar-inner {
+      padding-top: 10px;
+      padding-bottom: 10px;
       color: var(--mainfont);
-      font-weight: 1;
-      font-size: 1rem;
-      letter-spacing: .16em;
-      line-height: 0.5;
+      font-size: .85rem;
+      letter-spacing: .18em;
+      line-height: 1;
     }
     .top-bar-inner a { color: inherit; text-decoration: none; }
-    .ai-highlight { color: var(--paper); }
+    .ai-highlight { font-weight: 700; }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     .brand-logo {
       display: block;
-      height: 70px;
+      height: 40px;
       width: auto;
     }
 
@@ -108,7 +103,7 @@
     h1 {
       margin: 0;
       font-family: var(--font-display);
-      font-weight: 700;
+      font-weight: 500;
       font-size: 2rem;
       line-height: 1.12;
     }
@@ -173,7 +168,7 @@
       top: 14px;
       z-index: 3;
       padding: 7px 10px;
-      background: rgba(222, 222, 222, .92);
+      background: rgba(246, 247, 247, .92);
       color: var(--mainfont);
       font-size: .62rem;
       font-weight: 700;
@@ -237,13 +232,13 @@
     .form-card {
       margin-top: 30px;
       padding: 24px 20px;
-      background: #f2f2f2;
-      border-top: 3px solid var(--accent);
+      background: #e8eff2;
+      border-top: 3px solid var(--ink);
     }
     .form-card h2 {
       margin: 0 0 6px;
       font-family: var(--font-display);
-      font-weight: 700;
+      font-weight: 500;
       font-size: 1.35rem;
     }
     .form-card p {
@@ -290,13 +285,20 @@
       h1 { font-size: 3rem; }
       .form-card { padding: 30px 28px; }
     }
+
+    ::selection { background: var(--ink); color: var(--mainfont); }
+    a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+    /* Typografia: Boska Medium tylko w dużym nagłówku, reszta w czytelnym Poppins */
+    h1 { font-family: var(--font-display); font-weight: 500; }
+    .form-card h2 { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 1.15rem; }
   </style>
 </head>
 <body>
   <div class="top-bar">
     <div class="page-shell top-bar-inner">
       <a href="zapisz.html" class="brand">
-        <img src="logo.png" alt="" class="brand-logo">
+        <img src="assets/logo.png" alt="" class="brand-logo">
         <span>PROJEKT<span class="ai-highlight">AI</span>KA</span>
       </a>
     </div>
@@ -330,9 +332,9 @@
 
       <div>
         <div class="comparison" aria-label="Suwak porównujący kuchnię przed i po wizualizacji AI">
-          <img src="result.png" alt="Kuchnia po wizualizacji AI">
+          <img src="assets/result.png" alt="Kuchnia po wizualizacji AI">
           <div id="before-layer" class="comparison-before">
-            <img src="Image1.png" alt="Kuchnia przed remontem">
+            <img src="assets/Image1.png" alt="Kuchnia przed remontem">
           </div>
           <span class="image-label label-before">PRZED</span>
           <span class="image-label label-after">PO</span>

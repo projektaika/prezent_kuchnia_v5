@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Strona-prezent dla subskrybentów newslettera: ukryta przed Google i innymi wyszukiwarkami -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>ProjektAIka — Zobacz swoją nową kuchnię</title>
+  <link rel="icon" href="../assets/logo.png">
+  <!-- Czcionka nagłówków: Boska (darmowa, Fontshare) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=boska@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* KOLORY MARKI: niebieski #a3bcc7 i brąz #543a2b, reszta to ich jaśniejsze odcienie */
+    :root {
+      --ink: #a3bcc7;          /* niebieski marki: pasek, numery kroków, linie */
+      --mainfont: #543a2b;     /* brąz marki: tekst i przyciski */
+      --accent: #543a2b;       /* przyciski i wyróżnienia = brąz marki */
+      --accent-dark: #3f2b20;
+      --paper: #f6f7f7;        /* tło strony: prawie biel z nutą niebieskiego */
+      --card: #e8eff2;         /* tło kart: jasny odcień niebieskiego marki */
+      --line: #a3bcc7;         /* linie = niebieski marki */
+      --muted: #6e625a;        /* szary tekst w odcieniu brązu */
+      --soft: #dfe7ea;
+      --font-display: "Boska", "Playfair Display", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--mainfont);
+      background: var(--paper);
+      font-family: "Poppins", sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    img { max-width: 100%; }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .page-shell {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ---------- Pasek z logo (jak w zapisz.html) ---------- */
+    .top-bar { background: var(--ink); }
+    .top-bar-inner {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      color: var(--mainfont);
+      font-size: .85rem;
+      letter-spacing: .18em;
+      line-height: 1;
+    }
+    .top-bar-inner a { color: inherit; text-decoration: none; }
+    .ai-highlight { font-weight: 700; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand-logo { display: block; height: 40px; width: auto; }
+
+    /* ---------- Drobiazgi ---------- */
+    ::selection { background: var(--ink); color: var(--mainfont); }
+    a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+    /* ---------- Nagłówki ---------- */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    h1 { font-size: 2rem; line-height: 1.15; }
+    h2 { font-size: 1.5rem; line-height: 1.2; }
+    h3 { font-size: 1.15rem; line-height: 1.3; }
+
+    p { margin: 0; }
+
+    /* ---------- Hero: tekst + suwak ---------- */
+    .hero {
+      display: grid;
+      gap: 32px;
+      padding: 40px 0 56px;
+    }
+
+    /* Na telefonie suwak pod nagłówkiem, a lista "czego potrzebujesz" pod suwakiem */
+    .hero-text, .hero-visual, .needs-wrap { min-width: 0; }
+
+    .lead {
+      margin-top: 16px;
+      max-width: 34em;
+    }
+
+    /* Lista "czego potrzebujesz" jak w przepisie */
+    .needs {
+      margin-top: 0;
+      padding: 20px;
+      background: var(--card);
+      border-radius: 4px;
+    }
+    .needs h2 { font-size: 1.05rem; }
+    .needs ul {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .needs li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+      font-size: .93rem;
+      line-height: 1.45;
+    }
+    .needs li:first-child { border-top: 0; }
+    .needs img {
+      flex: none;
+      width: 52px; height: 40px;
+      object-fit: cover;
+      border-radius: 2px;
+      background: var(--soft);
+    }
+    .needs .icon-box {
+      flex: none;
+      display: grid;
+      width: 52px; height: 40px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: var(--accent);
+    }
+    .needs .icon-box img { width: 24px; height: 24px; object-fit: contain; background: none; border-radius: 0; }
+    .needs small { display: block; color: var(--muted); font-size: .8rem; }
+
+    .comparison {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 4px;
+      background: var(--soft);
+      cursor: ew-resize;
+      user-select: none;
+      touch-action: pan-y;
+    }
+    .comparison img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .comparison-before {
+      position: absolute;
+      inset: 0;
+      clip-path: inset(0 50% 0 0);
+    }
+    .image-label {
+      position: absolute;
+      top: 12px;
+      z-index: 3;
+      padding: 4px 10px;
+      border-radius: 2px;
+      background: rgba(246, 247, 247, .92);
+      font-size: .75rem;
+      font-weight: 600;
+    }
+    .label-before { left: 12px; }
+    .label-after { right: 12px; }
+    .slider-line {
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      z-index: 5;
+      width: 2px;
+      background: #fff;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .slider-handle {
+      position: absolute;
+      top: 50%; left: 50%;
+      z-index: 6;
+      display: grid;
+      width: 42px; height: 42px;
+      place-items: center;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--paper);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .slider-range {
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      width: 100%; height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: ew-resize;
+    }
+    .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    /* ---------- Kroki: oś z numerami ---------- */
+    .method {
+      padding: 48px 0 24px;
+      border-top: 1px solid var(--line);
+    }
+    .method > h2 { margin-bottom: 32px; }
+
+    .steps {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    /* pionowa linia łącząca kroki */
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 20px; bottom: 20px; left: 19px;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 18px;
+      padding-bottom: 44px;
+    }
+    .step:last-child { padding-bottom: 0; }
+
+    .step-number {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 40px; height: 40px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--mainfont);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .step-body { min-width: 0; padding-top: 6px; }
+    .step-body > p {
+      margin-top: 10px;
+      max-width: 36em;
+    }
+
+    .tip {
+      margin-top: 18px;
+      max-width: 30em;
+      padding-left: 18px;
+      border-left: 2px solid var(--ink);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.1rem;
+      line-height: 1.45;
+    }
+
+    /* ---------- Przyciski ---------- */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      margin-top: 18px;
+      padding: 12px 22px;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      background: var(--accent);
+      color: var(--paper);
+      font-family: "Poppins", sans-serif;
+      font-size: .92rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+    /* Wszystkie przyciski są brązowe, a po najechaniu robią się przezroczyste */
+    .button:hover { background: transparent; color: var(--accent); }
+
+    .note {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    /* Krok 2: moodboard */
+    .moodboard {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+      padding: 16px;
+      background: var(--card);
+      border-radius: 4px;
+      max-width: 520px;
+    }
+    .moodboard img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+      background: var(--soft);
+    }
+    .moodboard .button { margin-top: 0; }
+
+    /* Krok 3: dwa zdjęcia do jednej wiadomości */
+    .pair {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      max-width: 420px;
+    }
+    .pair figure { flex: 1; margin: 0; }
+    .pair img {
+      display: block;
+      width: 100%;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 2px;
+      background: var(--soft);
+    }
+    .pair figcaption {
+      margin-top: 6px;
+      line-height: 1.3;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+    .pair { max-width: 520px; }
+    .pair .chat-target {
+      display: grid;
+      height: 96px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: var(--card);
+      color: var(--accent);
+    }
+    .pair .chat-target img { width: 40px; height: 40px; object-fit: contain; background: none; border-radius: 0; }
+    .pair .plus {
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      padding-bottom: 22px;
+    }
+
+    /* Krok 4: prompt */
+    .prompt-card {
+      margin-top: 18px;
+      max-width: 620px;
+      border-radius: 4px;
+      background: var(--card);
+      overflow: hidden;
+    }
+    .prompt-preview {
+      position: relative;
+      max-height: 168px;
+      overflow: hidden;
+      padding: 18px 18px 0;
+      font-size: .86rem;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+    .prompt-preview::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 64px;
+      background: linear-gradient(to bottom, rgba(232,239,242,0), var(--card));
+    }
+    .prompt-actions { padding: 4px 18px 18px; }
+    .prompt-actions .button { width: 100%; margin-top: 8px; }
+    .copy-button .copy-success { display: none; }
+    .copy-button.is-copied, .copy-button.is-copied:hover { background: var(--ink); border-color: var(--ink); color: var(--mainfont); }
+    .copy-button.is-copied .copy-default { display: none; }
+    .copy-button.is-copied .copy-success { display: inline; }
+    .copy-message {
+      min-height: 1.2em;
+      margin-top: 8px;
+      color: var(--accent);
+      font-size: .8rem;
+    }
+
+    /* Krok 5: poprawki */
+    .fixes {
+      margin-top: 28px;
+      max-width: 34em;
+    }
+    .fixes > p { font-size: .93rem; }
+    .fix {
+      margin: 0;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.15rem;
+      line-height: 1.4;
+    }
+    .fixes > p + .fix { margin-top: 6px; border-top: 1px solid var(--line); }
+
+    /* ---------- Zakończenie ---------- */
+    .closing {
+      display: grid;
+      gap: 28px;
+      margin-top: 64px;
+      padding: 48px 0 64px;
+      border-top: 1px solid var(--line);
+    }
+    .closing-text p {
+      margin-top: 12px;
+      max-width: 30em;
+    }
+    .share-card {
+      padding: 24px;
+      border-radius: 4px;
+      background: var(--card);
+    }
+    .share-card h3 { margin-bottom: 8px; }
+    .share-card p { font-size: .93rem; }
+    .share-card .button { margin-top: 16px; }
+    .signature {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+    .signature strong { display: block; font-weight: 600; font-size: 1rem; }
+
+    /* ---------- Stopka ---------- */
+    .site-footer { background: var(--ink); color: var(--mainfont); }
+    .site-footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-top: 22px;
+      padding-bottom: 22px;
+      font-size: .85rem;
+    }
+    .site-footer .brand { color: inherit; text-decoration: none; letter-spacing: .18em; font-size: .85rem; }
+    .site-footer nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    .site-footer nav a { color: inherit; }
+    .site-footer small { font-size: .78rem; }
+
+    @media (min-width: 820px) {
+      .page-shell { padding: 0 46px; }
+      .hero {
+        grid-template-columns: 1fr 1.1fr;
+        column-gap: 56px;
+        row-gap: 28px;
+        align-items: start;
+        padding: 64px 0 80px;
+      }
+      h1 { font-size: 2.6rem; }
+      h3 { font-size: 1.3rem; }
+      .hero-visual { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+      .comparison { aspect-ratio: 5 / 4; }
+      h2 { font-size: 1.65rem; }
+      .method { padding-top: 64px; }
+      .steps::before { left: 23px; top: 24px; bottom: 24px; }
+      .step { grid-template-columns: 48px 1fr; gap: 28px; padding-bottom: 56px; }
+      .step-number { width: 48px; height: 48px; font-size: 1.15rem; }
+      .step-body { padding-top: 10px; }
+      .moodboard { grid-template-columns: 240px 1fr; align-items: center; gap: 24px; }
+      .pair img, .pair .chat-target { height: 120px; }
+      .closing { grid-template-columns: 1.1fr .9fr; column-gap: 56px; align-items: start; }
+      .site-footer-inner { flex-direction: row; align-items: center; justify-content: space-between; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+
+    /* Typografia: Boska Medium tylko w dużych nagłówkach, reszta w czytelnym Poppins */
+    h1, h2 { font-family: var(--font-display); font-weight: 500; }
+    h3, .needs h2, .step-number, .pair .plus,
+    .tip, .fix, .signature { font-family: "Poppins", sans-serif; }
+    h3 { font-weight: 600; font-size: 1.05rem; line-height: 1.35; }
+    .needs h2 { font-weight: 600; font-size: .95rem; }
+    .step-number { font-weight: 600; font-size: .95rem; }
+    .pair { max-width: 520px; }
+    .pair .chat-target {
+      display: grid;
+      height: 96px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: var(--card);
+      color: var(--accent);
+    }
+    .pair .chat-target img { width: 40px; height: 40px; object-fit: contain; background: none; border-radius: 0; }
+    .pair .plus { font-weight: 400; }
+    .tip { font-weight: 500; font-size: .98rem; line-height: 1.6; }
+    .fix { font-weight: 500; font-size: 1rem; line-height: 1.55; }
+    .signature { font-weight: 400; font-size: .9rem; }
+    [hidden] { display: none !important; }
+    @media (min-width: 820px) {
+      h3 { font-size: 1.15rem; }
+      .step-number { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="page-shell top-bar-inner">
+      <a href="../zapisz.html" class="brand">
+        <img src="../assets/logo.png" alt="" class="brand-logo">
+        <span>PROJEKT<span class="ai-highlight">AI</span>KA</span>
+      </a>
+    </div>
+  </div>
+
+  <main class="page-shell">
+    <!-- ===== Hero ===== -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-text">
+        <h1 id="hero-heading">Zobacz swoją nową kuchnię, zanim wydasz pieniądze na remont.</h1>
+        <p class="lead">Ta instrukcja prowadzi Cię krok po kroku do wizualizacji takiej jak na zdjęciu. Zajmie Ci to około 10 minut.</p>
+      </div>
+
+      <div class="hero-visual">
+        <div class="comparison" aria-label="Suwak porównujący kuchnię przed i po wizualizacji AI">
+          <img src="../assets/result.png" alt="Kuchnia po wizualizacji AI">
+          <div id="before-layer" class="comparison-before">
+            <img src="../assets/Image1.png" alt="Kuchnia przed remontem">
+          </div>
+          <span class="image-label label-before">Przed</span>
+          <span class="image-label label-after">Po</span>
+          <div id="slider-line" class="slider-line"></div>
+          <div id="slider-handle" class="slider-handle" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-5 5 5 5"/><path d="m15 7 5 5-5 5"/></svg>
+          </div>
+          <label for="comparison-range" class="sr-only">Przesuń, aby porównać kuchnię przed i po</label>
+          <input id="comparison-range" class="slider-range" type="range" min="0" max="100" value="50">
+        </div>
+        <p class="caption">Przesuń suwak. Tę wizualizację zrobiłam w ChatGPT dokładnie tym sposobem.</p>
+      </div>
+
+      <div class="needs-wrap">
+        <div class="needs">
+          <h2>Czego potrzebujesz</h2>
+          <ul>
+            <li>
+              <img src="../assets/Image1.png" alt="">
+              <span>Zdjęcia swojej kuchni<small>Zrobisz je telefonem w kroku 1</small></span>
+            </li>
+            <li>
+              <img src="../assets/Image2.png" alt="">
+              <span>Moodboardu<small>Pobierzesz go w kroku 2</small></span>
+            </li>
+            <li>
+              <span class="icon-box" aria-hidden="true">
+                <img class="logo-img" src="../assets/chatgpt-logo.png" alt="">
+                <svg class="logo-fallback" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" hidden><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </span>
+              <span>Darmowego konta ChatGPT<small>Założysz je w minutę w kroku 3</small></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===== Kroki ===== -->
+    <section class="method" aria-labelledby="method-heading">
+      <h2 id="method-heading">Krok po kroku</h2>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step-number" aria-hidden="true">1</span>
+          <div class="step-body">
+            <h3>Zrób zdjęcie swojej kuchni</h3>
+            <p>Stań w miejscu, z którego dobrze widać całe pomieszczenie. Najlepiej przy naturalnym świetle, szerokim kadrem i bez trybu portretowego.</p>
+            <p class="tip">Im lepiej AI widzi układ pomieszczenia, tym łatwiej zachowa jego prawdziwe proporcje.</p>
+          </div>
+        </li>
+
+        <li class="step">
+          <span class="step-number" aria-hidden="true">2</span>
+          <div class="step-body">
+            <h3>Pobierz moodboard</h3>
+            <p>Moodboard pokazuje AI, jak ma wyglądać Twoja nowa kuchnia. To z niego ChatGPT odczyta kolor frontów, drewno, blat, płytki, uchwyty, armaturę i klimat wnętrza.</p>
+            <div class="moodboard">
+              <img id="moodboard-image" loading="lazy" src="../assets/Image2.png" alt="Moodboard kuchni z próbkami frontów, drewna, płytek, uchwytów i armatury">
+              <div>
+                <button id="download-moodboard" type="button" class="button">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="m6 11 6 6 6-6"/><path d="M5 20h14"/></svg>
+                  Pobierz moodboard
+                </button>
+                <p id="download-note" class="note">Plik zapisze się na Twoim urządzeniu.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <span class="step-number" aria-hidden="true">3</span>
+          <div class="step-body">
+            <h3>Otwórz ChatGPT i dodaj oba zdjęcia</h3>
+            <p>W nowej rozmowie dodaj do jednej wiadomości zdjęcie kuchni i moodboard. Nie wysyłaj jej jeszcze, najpierw skopiuj prompt z kolejnego kroku.</p>
+            <div class="pair" aria-label="Do jednej wiadomości w ChatGPT dodajesz dwa obrazy">
+              <figure>
+                <img loading="lazy" src="../assets/Image1.png" alt="">
+                <figcaption>Zdjęcie Twojej kuchni</figcaption>
+              </figure>
+              <span class="plus" aria-hidden="true">+</span>
+              <figure>
+                <img loading="lazy" src="../assets/Image2.png" alt="">
+                <figcaption>Moodboard</figcaption>
+              </figure>
+              <span class="plus" aria-hidden="true">→</span>
+              <figure>
+                <div class="chat-target">
+                  <img class="logo-img" src="../assets/chatgpt-logo.png" alt="Logo ChatGPT">
+                  <svg class="logo-fallback" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" hidden><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <figcaption>ChatGPT</figcaption>
+              </figure>
+            </div>
+            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="button">Otwórz ChatGPT</a>
+          </div>
+        </li>
+
+        <li class="step">
+          <span class="step-number" aria-hidden="true">4</span>
+          <div class="step-body">
+            <h3>Skopiuj gotowy prompt</h3>
+            <p>Nie musisz opisywać każdego materiału. Ten prompt mówi ChatGPT, co może zmienić, a czego nie powinien ruszać.</p>
+            <div class="prompt-card">
+              <div id="prompt-preview" class="prompt-preview">Image 1: zdjęcie bazowe kuchni — istniejące pomieszczenie, którego architekturę i perspektywę zachowujemy bez zmian.
+Image 2: moodboard stylistyczny — referencja palety kolorów, materiałów i nastroju do przeniesienia.
+
+Zadanie: Wygeneruj fotorealistyczną wizualizację tej kuchni w stylu z Image 2, zachowując dokładną architekturę i ujęcie z Image 1.
+
+Zachowaj bez zmian:
+- dokładny kąt kamery, kadr i perspektywę z Image 1
+- pozycję okien, drzwi, ścian, sufitu i podłogi</div>
+              <div class="prompt-actions">
+                <button id="copy-prompt" type="button" class="button copy-button">
+                  <span class="copy-default">Skopiuj cały prompt</span>
+                  <span class="copy-success">Skopiowano ✓</span>
+                </button>
+                <p id="copy-message" class="copy-message" aria-live="polite"></p>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <span class="step-number" aria-hidden="true">5</span>
+          <div class="step-body">
+            <h3>Wygeneruj swoją kuchnię</h3>
+            <p>Wklej prompt pod załączonymi zdjęciami i wyślij wiadomość. Po chwili zobaczysz swoją kuchnię w nowym stylu.</p>
+            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="button">Wróć do ChatGPT</a>
+
+            <div class="fixes">
+              <p>Pierwsza wersja nie jest idealna? Nie zaczynaj od początku. Poproś o zmianę tylko jednego elementu, na przykład:</p>
+              <blockquote class="fix">„Zmień tylko kolor frontów na biały. Poza tym nic nie zmieniaj.”</blockquote>
+              <blockquote class="fix">„Zmień tylko płytki między blatem a szafkami na płytki z załącznika.”</blockquote>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== Zakończenie ===== -->
+    <section class="closing" aria-labelledby="closing-heading">
+      <div class="closing-text">
+        <h2 id="closing-heading">Najpierw zobacz. Potem zdecyduj.</h2>
+        <p>AI nie musi projektować domu za Ciebie. Może pomóc Ci zobaczyć pomysł, zanim wydasz na niego pieniądze.</p>
+      </div>
+
+      <aside class="share-card" aria-labelledby="share-heading">
+        <h3 id="share-heading">Pokaż mi swoją nową kuchnię</h3>
+        <p>Wrzuć wizualizację na Instagram i oznacz @projektaika. Chętnie ją zobaczę.</p>
+        <a href="https://www.instagram.com/projektaika/" target="_blank" rel="noopener noreferrer" class="button">Otwórz Instagram</a>
+        <p class="signature"><strong>Ola</strong>ProjektAIka</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-shell site-footer-inner">
+      <a href="../zapisz.html" class="brand">
+        <img src="../assets/logo.png" alt="" class="brand-logo">
+        <span>PROJEKT<span class="ai-highlight">AI</span>KA</span>
+      </a>
+      <nav aria-label="Stopka">
+        <a href="https://www.instagram.com/projektaika/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="mailto:kontakt@projektaika.pl">kontakt@projektaika.pl</a>
+        <a href="../polityka-prywatnosci.html">Polityka prywatności</a>
+      </nav>
+      <small>© 2026 ProjektAIka</small>
+    </div>
+  </footer>
+
+  <script>
+    const FULL_PROMPT = `Image 1: zdjęcie bazowe kuchni — istniejące pomieszczenie, którego architekturę i perspektywę
+zachowujemy bez zmian.
+Image 2: moodboard stylistyczny — referencja palety kolorów, materiałów i nastroju do przeniesienia.
+
+Zadanie: Wygeneruj fotorealistyczną wizualizację tej kuchni w stylu z Image 2, zachowując dokładną
+architekturę i ujęcie z Image 1.
+
+Zachowaj bez zmian:
+- dokładny kąt kamery, kadr i perspektywę z Image 1
+- pozycję okien, drzwi, ścian, sufitu i podłogi
+- proporcje i geometrię zabudowy kuchennej (te same miejsca i długości szafek/wyspy)
+- naturalne oświetlenie wpadające przez istniejące okno, zgodne z porą dnia z Image 1
+
+Zmień, przenosząc styl z Image 2:
+- kolor i wykończenie frontów szafek (barwa, faktura, połysk/mat)
+- materiał i kolor blatu zgodnie z moodboardem
+- płytki/panel ścienny za blatem (backsplash) w stylistyce z Image 2
+- kolor ścian
+- podłoga drewniana zgodna z moodboardem
+- uchwyty, oświetlenie punktowe/wiszące oraz dodatki (rośliny, naczynia, tekstylia) w duchu moodboardu
+- dekorację na okno (roleta/zasłona/firana) zgodnie z moodboardem
+- zabudowa w kształcie litery L, górne szafki zabudowane do sufitu
+- oświetlenie punktowe przy zabudowie kuchennej
+- stół z krzesłami zgodny z moodboardem i oświetlenie nad stołem
+
+Dodatkowe wymagania:
+nie dodawaj gałązek oliwnych, zamiast tego polne kwiaty lub tulipany
+głębokość szafek w zabudowie kuchennej to 60cm
+zabudowa musi zawierać wszystkie niezbędne kuchenne elementy tzn lodówkę (najlepiej w zabudowie), piekarnik, płytę grzewczą, zlew
+
+Wymagania fotorealizmu:
+photorealistic, professional interior/real-estate photography, realistyczne cienie kontaktowe
+i odbicia światła na nowych materiałach, wyraźna, prawdziwa tekstura (usłojenie drewna,
+żyłkowanie kamienia, splot tkanin), spójna skala i geometria z oryginałem.
+
+Ograniczenia:
+- nie zmieniaj układu ścian, okien ani drzwi
+- bez duplikowania mebli i sprzętu AGD
+- bez znaków wodnych, logotypów i dodatkowego tekstu w kadrze
+
+Rozmiar: nie zmieniaj rozmiaru obrazu, quality: high`;
+
+    /* --- Logo ChatGPT: jeśli pliku nie ma w assets, pokaż prostą ikonkę dymku --- */
+    document.querySelectorAll(".logo-img").forEach(function (img) {
+      function showFallback() { img.hidden = true; img.nextElementSibling.removeAttribute("hidden"); }
+      if (img.complete && img.naturalWidth === 0) showFallback();
+      else img.addEventListener("error", showFallback);
+    });
+
+    /* --- Suwak przed / po --- */
+    const range = document.getElementById("comparison-range");
+    const beforeLayer = document.getElementById("before-layer");
+    const sliderLine = document.getElementById("slider-line");
+    const sliderHandle = document.getElementById("slider-handle");
+
+    function updateComparison(value) {
+      beforeLayer.style.clipPath = "inset(0 " + (100 - value) + "% 0 0)";
+      sliderLine.style.left = value + "%";
+      sliderHandle.style.left = value + "%";
+    }
+    let userMoved = false;
+    range.addEventListener("input", function () { userMoved = true; updateComparison(this.value); });
+    updateComparison(range.value);
+
+    /* Jednorazowa podpowiedź: suwak sam przesuwa się w lewo i wraca, żeby pokazać, że można nim ruszać */
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduceMotion) {
+      const keyframes = [50, 30, 70, 50];
+      let i = 0, from = 50;
+      function animateTo(to, done) {
+        const start = performance.now(), dur = 700;
+        function frame(t) {
+          if (userMoved) return;
+          const k = Math.min((t - start) / dur, 1);
+          const e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+          const v = from + (to - from) * e;
+          range.value = v;
+          updateComparison(v);
+          if (k < 1) requestAnimationFrame(frame); else { from = to; done(); }
+        }
+        requestAnimationFrame(frame);
+      }
+      function next() { i++; if (i < keyframes.length) animateTo(keyframes[i], next); }
+      window.setTimeout(next, 900);
+    }
+
+    /* --- Kopiowanie promptu --- */
+    const copyButton = document.getElementById("copy-prompt");
+    const copyMessage = document.getElementById("copy-message");
+
+    function showCopied() {
+      copyButton.classList.add("is-copied");
+      copyMessage.textContent = "Prompt jest w schowku. Wklej go w ChatGPT pod zdjęciami.";
+      window.setTimeout(function () {
+        copyButton.classList.remove("is-copied");
+        copyMessage.textContent = "";
+      }, 3000);
+    }
+
+    async function copyPrompt() {
+      try {
+        await navigator.clipboard.writeText(FULL_PROMPT);
+        showCopied();
+      } catch (error) {
+        const textArea = document.createElement("textarea");
+        textArea.value = FULL_PROMPT;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.select();
+        const copied = document.execCommand("copy");
+        textArea.remove();
+        if (copied) {
+          showCopied();
+        } else {
+          copyMessage.textContent = "Nie udało się skopiować. Kliknij przycisk jeszcze raz.";
+        }
+      }
+    }
+    copyButton.addEventListener("click", copyPrompt);
+
+    /* --- Pobieranie moodboardu --- */
+    const downloadMoodboard = document.getElementById("download-moodboard");
+    const downloadNote = document.getElementById("download-note");
+    const moodboardImage = document.getElementById("moodboard-image");
+
+    downloadMoodboard.addEventListener("click", function () {
+      const imageUrl = moodboardImage.currentSrc || moodboardImage.src;
+      if (!imageUrl) {
+        downloadNote.textContent = "Nie znaleziono pliku moodboardu.";
+        return;
+      }
+      const extMatch = imageUrl.split(/[?#]/)[0].match(/\.(\w+)$/);
+      const extension = extMatch ? extMatch[1] : "jpg";
+      const link = document.createElement("a");
+      link.href = imageUrl;
+      link.download = `moodboard-projektAIka.${extension}`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      downloadNote.textContent = "Moodboard jest pobrany.";
+    });
+  </script>
+</body>
+</html>
